@@ -19,7 +19,7 @@ class EventCount(models.Model):
     count = models.IntegerField()
 
     class Meta:
-        unique_together = ((repo, user, event), )
+        unique_together = (('repo', 'user', 'event'), )
 
 class Role(models.Model):
     repo = models.ForeignKey(Repository)
@@ -28,4 +28,4 @@ class Role(models.Model):
     contributions = JSONField(default="{}")
 
     class Meta:
-        unique_together = ((repo, user), )
+        unique_together = (('repo', 'user'), )
