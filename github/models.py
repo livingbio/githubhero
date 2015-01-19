@@ -3,13 +3,13 @@ from jsonfield import JSONField
 
 
 class Repository(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, unique=True)
 
 class User(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, unique=True)
 
 class Event(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, unique=True)
 
 # Create your models here.
 class EventCount(models.Model):
