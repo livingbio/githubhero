@@ -20,6 +20,10 @@ def input(file):
             actor = row['actor']
             type = row['type']
             if not repo or not actor or not type: continue
+            if len(repos) > 1000000:
+                repos.clear()
+            if len(users) > 1000000:
+                users.clear()
 
             repo = repos.setdefault(repo, Repository.objects.get_or_create(name = repo)[0])
             actor = users.setdefault(actor, User.objects.get_or_create(name=actor)[0])
@@ -38,6 +42,6 @@ def input(file):
                 logging.exception(e)
 
 
-for i in os.listdir('./git-log'):
+for i in reversed(os.listdir('./git-log')):
     print 'process', i
     input('./git-log/' + i)

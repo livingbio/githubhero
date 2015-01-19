@@ -1,2 +1,3 @@
 django
 jsonfield
+google-api-python-client
