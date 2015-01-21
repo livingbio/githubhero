@@ -1,6 +1,6 @@
 from django.db import models
 from jsonfield import JSONField
-
+from .service_provider import *
 
 class Repository(models.Model):
     name = models.CharField(max_length=255, unique=True)
@@ -20,6 +20,12 @@ class EventCount(models.Model):
 
     class Meta:
         unique_together = (('repo', 'user', 'event'), )
+
+    @classmethod
+    def fetch(cls, repo):
+        query = "SELECT actor, type, f0_ FROM [github.githubhero] WHERE repository_name = '%s'" % repo
+        results, num = execute(734869178378, query)
+        return results
 
 class Role(models.Model):
     repo = models.ForeignKey(Repository)

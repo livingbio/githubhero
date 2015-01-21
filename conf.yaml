@@ -1,0 +1,17 @@
+
+
+predictors:
+    master:
+        uri: ./model/master.pkl
+
+    tester:
+        uri: ./model/tester.pkl
+
+    coder:
+        uri: ./model/coder.pkl
+
+    writer:
+        uri: ./model/writer.pkl
+
+    viewer:
+        uri: ./model/viewer.pkl
