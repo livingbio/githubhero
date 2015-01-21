@@ -6,7 +6,7 @@ def service(service, version, scope):
     credentials = gce.AppAssertionCredentials(scope=scope)
     http = credentials.authorize(httplib2.Http())
     return build(service, version, http=http)
-    
+
 
 def bigquery():
     return service('bigquery', 'v2', 'https://www.googleapis.com/auth/devstorage.read_write')
@@ -23,7 +23,7 @@ def execute(bqproject, query):
         }
     ).execute()
 
-    schema = [] 
+    schema = []
     for field in results['schema']['fields']:
         if field['type'] == "STRING":
             schema.append(str)
@@ -31,7 +31,7 @@ def execute(bqproject, query):
             schema.append(int)
 
     if 'rows' in results:
-        data = [[s(v['v']) for s, v in zip(schema, row['f'])] for row in results['rows']]
+        data = [tuple(s(v['v']) for s, v in zip(schema, row['f'])) for row in results['rows']]
         num = int(results.get('totalRows'))
 
         return data, num

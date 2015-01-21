@@ -1,54 +1,30 @@
 from django.shortcuts import render
 from .models import *
+from .classify import *
 import sklearn.preprocessing
+import pandas
 # Create your views here.
-
-class Predictor(object):
-    def predict(self, fs):
-        return 0
-
-predictors = {
-    "master": Predictor(),
-    "issue": Predictor(), # issue event
-    "coder": Predictor(),
-    "document": Predictor(),
-    "viewer": Predictor()
-}
-
-index = [
-    "CommitCommentEvent",
-    "CreateEvent",
-    "DeleteEvent",
-    "DownloadEvent",
-    "ForkApplyEvent",
-    "ForkEvent",
-    "GollumEvent",
-    "IssueCommentEvent",
-    "IssuesEvent",
-    "MemberEvent",
-    "PublicEvent",
-    "PullRequestEvent",
-    "PullRequestReviewCommentEvent",
-    "PushEvent",
-    "ReleaseEvent",
-    "TeamAddEvent",
-    "WatchEvent"
-]
 
 def contribution(request):
     repo = request.GET.get('repo')
 
     values = EventCount.fetch(repo)
+    X = numpy.zeros(
+        (len(values), ),
+        dtype=[
+            ('name', 'a10'),
+            ('event', 'a30'),
+            ('count', 'i4')
+        ])
+    X[:] = values
+    X = DataFrame(X)
 
-    names = list(set(k['actor'] for k in values))
-    matrix = numpy.zeros((len(names), len(index)))
+    X = pandas.tools.pivot.pivot_table(
+        X,
+        value='count',
+        index=['name'],
+        columns=['event'],
+        fill_value=0
+    )
 
-    for v in values:
-        x = names.index(v['actor'])
-        y = index.index(v['type'])
-        matrix[x,y] = v['f0_']
 
-    matrix = sklearn.preprocessing.normalize(matrix)
-
-    for predict in predictors:
-        predict.predict()
