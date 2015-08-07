@@ -3,7 +3,25 @@ import sklearn.externals
 import sklearn.preprocessing
 import sklearn.ensemble
 
-class RoleClassify(object):
+class Classify(object):
+    def __init__(self, config):
+        if "__file__" in config:
+            self.model = sklearn.job.load(config["__file__"])
+        else:
+            self.model =
+
+    def preprocessing(self, X):
+        return X
+
+    def fit(self, X, Y):
+        X = self.preprocessing(X)
+        self.model.fit(X, Y)
+
+    def predict(self, X):
+        X = self.preprocessing(X)
+        return self.model.predict(X)
+
+class RoleClassify(Classify):
     # define all event and the standard order of events
     cols = [
         "CommitCommentEvent",
@@ -39,11 +57,3 @@ class RoleClassify(object):
 
         Y = sklearn.preprocessing.normalize(X)
         return Y
-
-    def fit(self, X, Y):
-        X = self.preprocessing(X)
-        self.model.fit(X, Y)
-
-    def predict(X):
-        X = self.preprocessing(X)
-        return self.model.predict(X)
