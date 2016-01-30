@@ -1,5 +1,24 @@
-django
-jsonfield
-google-api-python-client
-pyyaml
-pandas
+# A high-level Python Web framework that encourages rapid development and clean, pragmatic design.
+# https://pypi.python.org/pypi/Django/1.9.1
+Django==1.9.1
+
+
+# A reusable Django field that allows you to store validated JSON in your model.
+# https://pypi.python.org/pypi/jsonfield/1.0.3
+jsonfield==1.0.3
+
+
+# Google API Client Library for Python
+# https://pypi.python.org/pypi/google-api-python-client/1.4.2
+google-api-python-client==1.4.2
+
+
+# YAML parser and emitter for Python
+# https://pypi.python.org/pypi/PyYAML/3.11
+PyYAML==3.11
+
+
+# Powerful data structures for data analysis, time series,and statistics
+# https://pypi.python.org/pypi/pandas/0.17.1
+pandas==0.17.1
+
