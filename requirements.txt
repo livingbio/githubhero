@@ -1,6 +1,6 @@
 # A high-level Python Web framework that encourages rapid development and clean, pragmatic design.
 # https://pypi.python.org/pypi/Django/1.9.1
-Django==1.9.1
+Django
 
 
 # A reusable Django field that allows you to store validated JSON in your model.
@@ -15,7 +15,7 @@ google-api-python-client==1.4.2
 
 # YAML parser and emitter for Python
 # https://pypi.python.org/pypi/PyYAML/3.11
-PyYAML==3.11
+PyYAML
 
 
 # Powerful data structures for data analysis, time series,and statistics
